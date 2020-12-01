@@ -29,10 +29,10 @@ global I1,I2,I3,Iw,omw,tup
 #for example
 I1,I2,I3=630000,1365000,1665000
 Iw=96
+
 #For a stabilization along the intermediate (here the second one) principal axis, with om2
-#chosen = np.pi/50 rd.s-1, the value of a positive omw would be, if determined with the simplifying assumption of an ab initio constant omw, 
-#at least om2*(I3-I2)/Iw, ie approx 196.35 rd.s-1, and
-#the value of a negative omw would be less than  om2(at tup)*(I1-I2)/Iw, ie approx -1042.29 rd.s-1.
+#chosen = np.pi/50 rd.s-1, the value of a positive omw would be(I2/I3)*om2*(I3-I2)/Iw > 160 rd.s-1, and
+#the value of a negative omw, would be less than (I2/I1)*(I1-I2)/Iw < -1043 rd.s-1.
 #But those limits are determined, (to ensure an equation of the kind d2(wi)/dt2=mu*wi with mu<0), with w2 being constant 
 #(such that mu is considered constant, and in particular remaining of the same sign).
 #Even if the fact that the limits are still authoritative if w2 varies as long as mu keep its negative sign, let's cast 
