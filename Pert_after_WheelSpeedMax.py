@@ -30,13 +30,13 @@ I1,I2,I3=630000,1365000,1665000
 Iw=96
 #For a stabilization along the intermediate (here the second one) principal axis, with om2
 #chosen = np.pi/50 rd.s-1, the value of a positive omw would be, if determined with the simplification mentionned above, 
-#at least om2*(I3-I2)/Iw, ie approx 196.35 rd.s-1, and
-#the value of a negative omw would be less than om2(at tup)*(I1-I2)/Iw, ie approx -1042.29 rd.s-1
+#at least (I2/I3)*om2*(I3-I2)/Iw > 160 rd.s-1, and
+#the value of a negative omw, would be less than (I2/I1)*(I1-I2)/Iw < -1043 rd.s-1
 
 #duration to reach for omw
 tup=15
 
-print('Case of stabilization with omw > 196.35 rd.s-1. 200 rd.s-1 for example')
+print('Case of stabilization with omw > 160 rd.s-1. 200 rd.s-1 for example')
 
 omw=200
 
@@ -63,7 +63,7 @@ sol=odeint(wheel.rota_up,y0,t2,(omw,I1,I2,I3,Iw))
 wheel.plotting(t2,sol)
 
 print('Case of unrealized stabilization because of an incorrect value of wheel rotation speed\
-omw < 196.35 rd.s-1 and > -1042.29 rd.s-1. 150 rad.s-1 for example')
+omw < 160 rd.s-1 and > -1042 rd.s-1; omw = 150 rad.s-1 for example')
 
 omw=150
 
@@ -89,7 +89,7 @@ sol=odeint(wheel.rota_up,y0,t2,(omw,I1,I2,I3,Iw))
 wheel.plotting(t2,sol)
 
 
-print('Case of stabilization with omw < -1042.29 rd.s-1. -1250 rd.s-1 for example')
+print('Case of stabilization with omw < -1043 rd.s-1. -1250 rd.s-1 for example')
 
 omw=-1250
 
