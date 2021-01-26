@@ -3,8 +3,8 @@
 
 
 #Let's visualize the stabilization of a spacecraft
-#by a spinning wheel, rotating at a constant speed, in case a perturbation intervenes after the spinning wheel reaches for its 
-#constant target speed.
+#by a spinning wheel, rotating at a constant speed, in case a perturbation intervenes after the spinning wheel reaches for the needed (computed in order to 
+#assure the stabilization of the spacecraft) constant target speed.
 
 #the Ii are the inertial moments around the principal axis of the spacecraft
 #Iw is the spin inertial moment of the wheel (whose, here, is chosen along the 2nd principal axis of the spacecraft)
@@ -49,7 +49,7 @@ sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
-#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) are left until now equal to 0 rad.s-1
+#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) have been left, until now, equal to 0 rad.s-1
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400, sol[999,1]+np.pi/350, np.pi/500], introducing arbitrary slight perturbations
 
@@ -76,7 +76,7 @@ sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
-#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) are left until now equal to 0 rad.s-1
+#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) have been left, until now, equal to 0 rad.s-1
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400,sol[999,1]+np.pi/350,np.pi/500], introducing arbitrary slight perturbations
 
@@ -101,7 +101,7 @@ sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
-#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) are left until now equal to 0 rad.s-1
+#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) have been left, until now, equal to 0 rad.s-1
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400,sol[999,1]+np.pi/350,np.pi/500], introducing arbitrary slight perturbations
 
