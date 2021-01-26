@@ -2,8 +2,9 @@
 # coding: utf-8
 
 
-#Let's search for a value of a spinning wheel rotation speed omw in order to preserve the stabilization of a spacecraft,
-#in case a perturbation intervenes before the spinning wheel reaches for the  
+#Let's probe whether a value of a spinning wheel rotation speed omw, determined in order to preserve the stabilization of a spacecraft in assuming
+# that no perturbation happens before this omw has been established,
+#will assure this stabilization in case a perturbation intervenes before the spinning wheel reaches for the  
 #target speed rotation. (NB: the spinning wheel speed rotation increases constantly by k rad.s-2 until omw(tup)).
 
 #The "full" equations are [d(om1)/dt, d(om2)/dt, d(om2)/dt] =  
@@ -98,7 +99,7 @@ sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
-#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) are left until now equal to 0 rad.s-1
+#Of course, om1 (=sol[999,0]) and om3 (=sol[999,2]) have been left, until now, equal to 0 rad.s-1
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400, sol[999,1]+np.pi/350, np.pi/500], introducing arbitrary slight perturbations
 
