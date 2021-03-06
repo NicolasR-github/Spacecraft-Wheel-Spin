@@ -21,7 +21,7 @@ import Dual_spin_module as wheel
 
 global I1,I2,I3,Iw,omw,tup
 
-#the Ii are the inertial moments around the principal axis of the spacecraft
+#the Ii are the inertial moments around the principal axes of the spacecraft
 #Iw is the spin inertial moment of the wheel (whose, here, is chosen along the 2nd principal axis of the spacecraft)
 #omw is the rotation speed of the wheel
 

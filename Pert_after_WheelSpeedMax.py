@@ -6,7 +6,7 @@
 #by a spinning wheel, rotating at a constant speed, in case a perturbation intervenes after the spinning wheel reaches for its 
 #constant target speed.
 
-#the Ii are the inertial moments around the principal axis of the spacecraft
+#the Ii are the inertial moments around the principal axes of the spacecraft
 #Iw is the spin inertial moment of the wheel (whose, here, is chosen along the 2nd principal axis of the spacecraft)
 #omw is the rotation speed of the wheel
 
