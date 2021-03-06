@@ -57,6 +57,6 @@ def rota_up_beta(y,t,omw,I1,I2,I3,Iw):
     db0,db1,db2,db3=np.double(np.array(qd)[0]),np.double(np.array(qd)[1]),np.double(np.array(qd)[2]),np.double(np.array(qd)[3])
 
 
-    dydt=[(1/I1)*((I2-I3)*om2*om3+Iw*om3*omw),(1/I2)*((I3-I1)*om1*om3),(1/I3)*((I1-I2)*om1*om2-Iw*om1*omw),db0,db1,db2,db3]
+    dy_b_dt=[(1/I1)*((I2-I3)*om2*om3+Iw*om3*omw),(1/I2)*((I3-I1)*om1*om3),(1/I3)*((I1-I2)*om1*om2-Iw*om1*omw),db0,db1,db2,db3]
 
-    return dydt
+    return dy_b_dt
