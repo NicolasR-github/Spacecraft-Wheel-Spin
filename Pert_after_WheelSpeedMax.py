@@ -17,9 +17,7 @@
 #[(1/I1)*((I2-I3)*om2*om3+Iw*om3*omw),(1/I2)*((I3-I1)*om1*om3),(1/I3)*((I1-I2)*om1*om2-Iw*om1*omw)]
 
 import numpy as np
-
 from scipy.integrate import odeint
-
 import Dual_spin_module as wheel
 
 global I1,I2,I3,Iw,omw,tup
