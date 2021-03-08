@@ -40,12 +40,20 @@ print('Case of stabilization with omw > 160 rd.s-1. 200 rd.s-1 for example')
 
 omw=200
 
+#Chosen initial rotation speed
 y0=[0,np.pi/50,0]
+
+#Initially, the principal rotation angle is null
+quater0=[1,0,0,0]
 
 t1=np.linspace(0,15,1000)
 
+#initial data in input to the integration process
+for i in range(4):
+    y0.append(quater0[i])
+    i+=1
 
-sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_beta,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
@@ -53,26 +61,43 @@ wheel.plotting(t1,sol)
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400, sol[999,1]+np.pi/350, np.pi/500], introducing arbitrary slight perturbations
 
-y0=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
+#The data given at the end of the above integration are
+y0=sol[999]
+#We introduce the mentionned slight perturbations
+y0[0:3]=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
 
 t2=np.linspace(15,1500,100000)
 
-
-sol=odeint(wheel.rota_up,y0,t2,(omw,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_up_beta,y0,t2,(omw,I1,I2,I3,Iw))
 
 wheel.plotting(t2,sol)
+
+b=sol[99999][3:7]
+
+print('The final quaternion is ', b)
+wheel.quater_module_check(b)
+
+
 
 print('Case of unrealized stabilization because of an incorrect value of wheel rotation speed\
 omw < 160 rd.s-1 and > -1042 rd.s-1; omw = 150 rad.s-1 for example')
 
 omw=150
 
-
+#Chosen initial rotation speed
 y0=[0,np.pi/50,0]
+
+#Initially, the principal rotation angle is null
+quater0=[1,0,0,0]
 
 t1=np.linspace(0,15,1000)
 
-sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
+#initial data in input to the integration process
+for i in range(4):
+    y0.append(quater0[i])
+    i+=1
+
+sol=odeint(wheel.rota_beta,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
@@ -80,24 +105,42 @@ wheel.plotting(t1,sol)
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400,sol[999,1]+np.pi/350,np.pi/500], introducing arbitrary slight perturbations
 
-y0=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
+#The data given at the end of the above integration are
+y0=sol[999]
+#We introduce the mentionned slight perturbations
+y0[0:3]=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
 
 t2=np.linspace(15,1500,100000)
 
-sol=odeint(wheel.rota_up,y0,t2,(omw,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_up_beta,y0,t2,(omw,I1,I2,I3,Iw))
 
 wheel.plotting(t2,sol)
+
+b=sol[99999][3:7]
+
+print('The final quaternion is ', b)
+wheel.quater_module_check(b)
+
 
 
 print('Case of stabilization with omw < -1043 rd.s-1. -1250 rd.s-1 for example')
 
 omw=-1250
 
+#Chosen initial rotation speed
 y0=[0,np.pi/50,0]
+
+#Initially, the principal rotation angle is null
+quater0=[1,0,0,0]
 
 t1=np.linspace(0,15,1000)
 
-sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
+#initial data in input to the integration process
+for i in range(4):
+    y0.append(quater0[i])
+    i+=1
+
+sol=odeint(wheel.rota_beta,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
@@ -105,11 +148,19 @@ wheel.plotting(t1,sol)
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400,sol[999,1]+np.pi/350,np.pi/500], introducing arbitrary slight perturbations
 
-y0=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
+#The data given at the end of the above integration are
+y0=sol[999]
+#We introduce the mentionned slight perturbations
+y0[0:3]=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
 
 t2=np.linspace(15,1500,100000)
 
-sol=odeint(wheel.rota_up,y0,t2,(omw,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_up_beta,y0,t2,(omw,I1,I2,I3,Iw))
 
 wheel.plotting(t2,sol)
+
+b=sol[99999][3:7]
+
+print('The final quaternion is ', b)
+wheel.quater_module_check(b)
 
