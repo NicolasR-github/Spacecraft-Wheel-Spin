@@ -14,9 +14,7 @@
 #[(1/I1)*((I2-I3)*om2*om3+Iw*om3*omw),(1/I2)*((I3-I1)*om1*om3),(1/I3)*((I1-I2)*om1*om2-Iw*om1*omw)]
 
 import numpy as np
-
 from scipy.integrate import odeint
-
 import Dual_spin_module as wheel
 
 
@@ -47,14 +45,20 @@ print('Case with omw = 200 rd.s-1.')
 
 omw=200
 
-
 y0=[0,np.pi/50,0]
+
+#Initially, the principal rotation angle is null
+quater0=[1,0,0,0]
 
 print('perturbations at a chosen timedate t=1s; until this timedate, "full" unperturbed equations run')
 t1=np.linspace(0,1,1000)
 
+#initial data in input to the integration process
+for i in range(4):
+    y0.append(quater0[i])
+    i+=1
 
-sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_beta,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
@@ -62,26 +66,33 @@ wheel.plotting(t1,sol)
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400, sol[999,1]+np.pi/350, np.pi/500], introducing arbitrary slight perturbations
 
-y0=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
+#The data given at the end of the above integration are
+y0=sol[999]
+#We introduce the mentionned slight perturbations
+y0[0:3]=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
 
 t2=np.linspace(1,15,1000)
 
-print('Now, "full" but "perturbed" equations still run')
+print('Then, and during added 14s, "full" but "perturbed" equations still run:')
 
-sol=odeint(wheel.rota,y0,t2,(omw,tup,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_beta,y0,t2,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t2,sol)
 
-y0=[sol[999,0],sol[999,1],sol[999,2]]
+y0=sol[999]
 
 t3=np.linspace(15,1500,100000)
 
+print('Finally, equations keep on running with omw at its commanded value:')
 
-print('Now, equations keep on running with omw at its commanded value')
-
-sol=odeint(wheel.rota_up,y0,t3,(omw,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_up_beta,y0,t3,(omw,I1,I2,I3,Iw))
 
 wheel.plotting(t3,sol)
+
+b=sol[99999][3:7]
+
+print('The final quaternion is ', b)
+wheel.quater_module_check(b)
 
 
 
@@ -91,11 +102,18 @@ omw=-1250
 
 y0=[0,np.pi/50,0]
 
-print('perturbations at a chosen timedate t=1s; until this timedate, "full" unperturbed equations run')
+#Initially, the principal rotation angle is null
+quater0=[1,0,0,0]
+
+print('perturbations at a chosen timedate t=1s; until this timedate, "full" unperturbed equations run:')
 t1=np.linspace(0,1,1000)
 
+#initial data in input to the integration process
+for i in range(4):
+    y0.append(quater0[i])
+    i+=1
 
-sol=odeint(wheel.rota,y0,t1,(omw,tup,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_beta,y0,t1,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t1,sol)
 
@@ -103,24 +121,32 @@ wheel.plotting(t1,sol)
 #Then let's change [sol[999,0],sol[999,1],sol[999,2]] = [0,sol[999,1],0] into
 #[np.pi/400, sol[999,1]+np.pi/350, np.pi/500], introducing arbitrary slight perturbations
 
-y0=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
+#The data given at the end of the above integration are
+y0=sol[999]
+#We introduce the mentionned slight perturbations
+y0[0:3]=[np.pi/400,sol[999,1]+np.pi/350,np.pi/500]
 
 t2=np.linspace(1,15,1000)
 
-print('Now, "full" but perturbed equations run')
+print('Then, and during added 14s, "full" but "perturbed" equations still run:')
 
-sol=odeint(wheel.rota,y0,t2,(omw,tup,I1,I2,I3,Iw))
+sol=odeint(wheel.rota_beta,y0,t2,(omw,tup,I1,I2,I3,Iw))
 
 wheel.plotting(t2,sol)
 
-y0=[sol[999,0],sol[999,1],sol[999,2]]
+y0=sol[999]
 
 t3=np.linspace(15,1500,100000)
 
-print('Now, equations keep on running with omw at its commanded value')
 
-sol=odeint(wheel.rota_up,y0,t3,(omw,I1,I2,I3,Iw))
+print('Finally, equations keep on running with omw at its commanded value:')
+
+sol=odeint(wheel.rota_up_beta,y0,t3,(omw,I1,I2,I3,Iw))
 
 wheel.plotting(t3,sol)
 
+b=sol[99999][3:7]
+
+print('The final quaternion is ', b)
+wheel.quater_module_check(b)
 
