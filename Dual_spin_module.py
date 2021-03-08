@@ -1,6 +1,6 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 def plotting(t,sol):
     plt.plot(t,sol[:,0],'y',label='om1(t)')
@@ -22,6 +22,7 @@ def rota(y,t,omw,tup,I1,I2,I3,Iw):
 
     return dydt
 
+
 def rota_up(y,t,omw,I1,I2,I3,Iw):
     #here, the wheel rotation speed has reached for its commanded value, omw 
     #function following the variations of w
@@ -30,9 +31,10 @@ def rota_up(y,t,omw,I1,I2,I3,Iw):
 
     return dydt
 
+
 def rota_beta(y,t,omw,tup,I1,I2,I3,Iw):
     #here, the wheel rotation speed omw(t) is increasing with t (omw(t) = k*t)
-    #function following the variations of w and of the quaternions (ie Euler) parameters
+    #function following the variation of w and the one of the quaternion (ie Euler parameters) 
     #tup: duration of continuous increase of omw
     om1,om2,om3,b0,b1,b2,b3=y
     
@@ -46,17 +48,35 @@ def rota_beta(y,t,omw,tup,I1,I2,I3,Iw):
    
     return dy_b_dt
 
+
 def rota_up_beta(y,t,omw,I1,I2,I3,Iw):
     #here, the wheel rotation speed has reached for its commanded value, omw 
-    #function following the variations of w
+    #function following the variations of w and the one of the quaternion (ie Euler parameters) 
     om1,om2,om3,b0,b1,b2,b3=y
 
+    #Matrix used for the quaternion differential equation:
     BETA=np.mat([[b0,-b1,-b2,-b3],[b1,b0,-b3,b2],[b2,b3,b0,-b1],[b3,-b2,b1,b0]])
-    #Quaternions derivatives:
+    
+    #Quaternion derivatives:
     qd=BETA*np.matrix.transpose(np.mat([0,om1,om2,om3]))
     db0,db1,db2,db3=np.double(np.array(qd)[0]),np.double(np.array(qd)[1]),np.double(np.array(qd)[2]),np.double(np.array(qd)[3])
-
 
     dy_b_dt=[(1/I1)*((I2-I3)*om2*om3+Iw*om3*omw),(1/I2)*((I3-I1)*om1*om3),(1/I3)*((I1-I2)*om1*om2-Iw*om1*omw),db0,db1,db2,db3]
 
     return dy_b_dt
+
+
+def quater_module_check(b):
+    #Calculus of quaternion squared module
+    pr=0
+    for i in range(4):
+        pr+=b[i]*b[i]
+    modu=np.sqrt(pr)
+    drift=modu-1
+    if drift<0.0001:
+        print('the unitary module of the quaternion is preserved,')
+        print('having drifted only by ', drift)
+    else:
+        print('WARNING: the module of the quaternion has drifted,')
+        print('from 1 to ', modu)
+
