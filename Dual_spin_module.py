@@ -38,7 +38,9 @@ def rota_beta(y,t,omw,tup,I1,I2,I3,Iw):
     #tup: duration of continuous increase of omw
     om1,om2,om3,b0,b1,b2,b3=y
     
-    BETA=np.mat([[b0,-b1,-b2,-b3],[b1,b0,-b3,b2],[b2,b3,b0,-b1],[b3,-b2,b1,b0]])
+    #Matrix used for the quaternion differential equation:
+    BETA=0.5*np.mat([[b0,-b1,-b2,-b3],[b1,b0,-b3,b2],[b2,b3,b0,-b1],[b3,-b2,b1,b0]])
+    
     #Quaternions derivatives:
     qd=BETA*np.matrix.transpose(np.mat([0,om1,om2,om3]))
     db0,db1,db2,db3=np.double(np.array(qd)[0]),np.double(np.array(qd)[1]),np.double(np.array(qd)[2]),np.double(np.array(qd)[3])
@@ -55,7 +57,7 @@ def rota_up_beta(y,t,omw,I1,I2,I3,Iw):
     om1,om2,om3,b0,b1,b2,b3=y
 
     #Matrix used for the quaternion differential equation:
-    BETA=np.mat([[b0,-b1,-b2,-b3],[b1,b0,-b3,b2],[b2,b3,b0,-b1],[b3,-b2,b1,b0]])
+    BETA=0.5*np.mat([[b0,-b1,-b2,-b3],[b1,b0,-b3,b2],[b2,b3,b0,-b1],[b3,-b2,b1,b0]])
     
     #Quaternion derivatives:
     qd=BETA*np.matrix.transpose(np.mat([0,om1,om2,om3]))
